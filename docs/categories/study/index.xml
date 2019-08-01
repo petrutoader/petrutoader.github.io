@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>study on After Party</title>
+    <link>https://x85.me/categories/study/</link>
+    <description>Recent content in study on After Party</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Oct 2018 10:16:44 +0200</lastBuildDate>
+    
+	<atom:link href="https://x85.me/categories/study/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>nand2tetris, building a modern computer from NAND gates</title>
+      <link>https://x85.me/posts/nand2tetris-building-a-computer-from-nand-gates/</link>
+      <pubDate>Mon, 15 Oct 2018 10:16:44 +0200</pubDate>
+      
+      <guid>https://x85.me/posts/nand2tetris-building-a-computer-from-nand-gates/</guid>
+      <description>Motivation I never studied software engineering in an academic setup, but somehow I got to the point in which I was confident with my software development skills. Obviously I wasn&amp;rsquo;t doing anything too fancy but it was enough for me. Recently as you can see from my blog I started getting into electrical engineering. I discovered that I had a huge knowledge gap, as I didn&amp;rsquo;t understand how the electrical part of the computers I was coding for was working, nor did I know how they functioned on a really low level.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://x85.me/</loc>
+    <lastmod>2019-08-01T12:00:00+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://x85.me/categories/</loc>
+    <lastmod>2019-08-01T12:00:00+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://x85.me/posts/its-been-a-while/</loc>
+    <lastmod>2019-08-01T12:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://x85.me/posts/</loc>
+    <lastmod>2019-08-01T12:00:00+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://x85.me/categories/electronics/</loc>
+    <lastmod>2019-08-01T12:00:00+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://x85.me/categories/personal/</loc>
+    <lastmod>2019-08-01T12:00:00+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://x85.me/posts/nand2tetris-building-a-computer-from-nand-gates/</loc>
+    <lastmod>2018-10-15T10:16:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://x85.me/categories/software/</loc>
+    <lastmod>2018-10-15T10:16:44+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://x85.me/categories/study/</loc>
+    <lastmod>2018-10-15T10:16:44+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://x85.me/posts/using-an-arduino-to-read-game-boy-cartridges/</loc>
+    <lastmod>2018-08-31T10:16:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://x85.me/categories/arduino/</loc>
+    <lastmod>2018-08-31T10:16:44+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://x85.me/categories/gameboy/</loc>
+    <lastmod>2018-08-31T10:16:44+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://x85.me/posts/how-do-gameboy-cartridges-work/</loc>
+    <lastmod>2018-08-16T11:23:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://x85.me/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

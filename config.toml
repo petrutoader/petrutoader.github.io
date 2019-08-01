@@ -1,0 +1,6 @@
+baseURL = "https://x85.me/"
+languageCode = "en-us"
+title = "After Party"
+publishDir = "docs"
+pygmentsuseclasses = true
+theme = "er"

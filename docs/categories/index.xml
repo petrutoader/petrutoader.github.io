@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on After Party</title>
+    <link>https://x85.me/categories/</link>
+    <description>Recent content in Categories on After Party</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Aug 2019 12:00:00 +0200</lastBuildDate>
+    
+	<atom:link href="https://x85.me/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>electronics</title>
+      <link>https://x85.me/categories/electronics/</link>
+      <pubDate>Thu, 01 Aug 2019 12:00:00 +0200</pubDate>
+      
+      <guid>https://x85.me/categories/electronics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>personal</title>
+      <link>https://x85.me/categories/personal/</link>
+      <pubDate>Thu, 01 Aug 2019 12:00:00 +0200</pubDate>
+      
+      <guid>https://x85.me/categories/personal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>software</title>
+      <link>https://x85.me/categories/software/</link>
+      <pubDate>Mon, 15 Oct 2018 10:16:44 +0200</pubDate>
+      
+      <guid>https://x85.me/categories/software/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>study</title>
+      <link>https://x85.me/categories/study/</link>
+      <pubDate>Mon, 15 Oct 2018 10:16:44 +0200</pubDate>
+      
+      <guid>https://x85.me/categories/study/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>arduino</title>
+      <link>https://x85.me/categories/arduino/</link>
+      <pubDate>Fri, 31 Aug 2018 10:16:44 +0200</pubDate>
+      
+      <guid>https://x85.me/categories/arduino/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gameboy</title>
+      <link>https://x85.me/categories/gameboy/</link>
+      <pubDate>Fri, 31 Aug 2018 10:16:44 +0200</pubDate>
+      
+      <guid>https://x85.me/categories/gameboy/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

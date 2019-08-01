@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>nand2tetris, building a modern computer from NAND gates - After Party</title>
+  <meta content='nand2tetris, building a modern computer from NAND gates - After Party' property='title' />
+  <meta content='nand2tetris, building a modern computer from NAND gates - After Party' property='og:title' />
+
+
+<meta property="og:description" content="Motivation I never studied software engineering in an academic setup, but somehow I got to the point in which I was confident with my software development skills. Obviously I wasn&rsquo;t doing anything too fancy but it was enough for me. Recently as you can see from my blog I started getting into electrical engineering. I discovered that I had a huge knowledge gap, as I didn&rsquo;t understand how the electrical part of the computers I was coding for was working, nor did I know how they functioned on a really low level." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://x85.me/posts/nand2tetris-building-a-computer-from-nand-gates/" />
+
+
+<meta property="article:published_time" content="2018-10-15T10:16:44&#43;02:00"/>
+
+<meta property="article:modified_time" content="2018-10-15T10:16:44&#43;02:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.1" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #8C6056; 
+  --secondary-color: #AFD5AA;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link href='/feed.xml' rel="alternate" type="application/atom+xml" title="After Party" />
+</head>
+<body class="global-font">
+  <nav class=" justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns content-width" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">After Party</a>
+  </div>
+  
+</nav>
+
+  
+<main class="center mv4 content-width ph3">
+  <div class="f3 fw6 heading-color heading-font post-title">nand2tetris, building a modern computer from NAND gates</div>
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>15 Oct 2018</time> 
+     | 
+    
+    categories: [ <a href='/categories/study' class="link silver">study</a> <a href='/categories/software' class="link silver">software</a>  ]
+    
+    
+  </p>
+  <div class="lh-copy post-content">
+
+<h1 id="motivation">Motivation</h1>
+
+<p>I never studied software engineering in an academic setup, but somehow I got to the point in which I was confident with my software development skills. Obviously I wasn&rsquo;t doing anything too fancy but it was enough for me. Recently as you can see from my blog I started getting into electrical engineering. I discovered that I had a huge knowledge gap, as I didn&rsquo;t understand how the electrical part of the computers I was coding for was working, nor did I know how they functioned on a really low level. So luckly <a href="http://vladh.net">vladh</a> recommended me this course, and I loved it.</p>
+
+<h1 id="about-the-course">About the course</h1>
+
+<p>Around 8 weeks ago I started <a href="https://nand2tetris.org">nand2tetris</a>, a fantastic course that I took on Coursera (called there &ldquo;Build a Modern Computer from First Principles: From Nand to Tetris&rdquo;) tought by two professors from Hebrew University of Jerusalem.</p>
+
+<p>The course takes you on a 6 week trip from building XOR, OR, AND, etc. chips using solely a NAND gate using HDL (Hardware Description Language) up until you&rsquo;ve built using those gates an ALU (Arithmetic Logic Unit) and further a CPU that can handle different types of operations (keyboard reading as well as displaying stuff on a virtual screen).</p>
+
+<h1 id="writing-an-assembler">Writing an assembler</h1>
+
+<p>In the last week you get to write an assembler for the PC you&rsquo;ve built so you don&rsquo;t have to write machine code for it. I&rsquo;ve done this initially in Python, but I&rsquo;m now rewriting it in C as I&rsquo;m currently learning the language.</p>
+
+<p>You can see the progress that I&rsquo;ve done by checking out the <a href="https://github.com/petrutoader/hack-assembler">repository of the assembler</a>.</p>
+
+<h1 id="writing-an-operating-system">Writing an operating system</h1>
+
+<p>I&rsquo;m currently thinking of starting the next course of the series which goes a lot deeper into the software engineering side of building a computer. From the reviews I saw that it&rsquo;s a ton of work and I have to make sure I have time planned for it. The main idea behind it is to get to the point in which you can play tetris on the computer, obviously for that you&rsquo;ll need a lot more than a simple assembler.</p>
+</div>
+</main>
+ 
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2">
+  <a href="https://x85.me/posts/using-an-arduino-to-read-game-boy-cartridges/">prev post</a>
+  <a href="https://x85.me/posts/its-been-a-while/">next post</a>
+  </p>
+</div>
+
+  <footer class="content-width mt0 mt5-l mb4 f6 center ph3 gray tc tl-l">
+  <hr class="dn db-l ml0-l gray w3"><br>
+  Powered by <a href="https://gohugo.io/" target="_blank" class="link gray dim">Hugo</a>, based on the <a href="https://github.com/lingxz/er" target="_blank" class="link gray dim">Er</a> theme. <br>
+  
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+  
+  if (document.getElementById("tag-cloud") !== null) { 
+    if (prevScrollpos > currentScrollPos) { 
+      document.getElementById("tag-cloud").style.visibility = "visible";
+      document.getElementById("tag-cloud").style.opacity = "1";
+    } else {
+      document.getElementById("tag-cloud").style.visibility = "hidden";
+      document.getElementById("tag-cloud").style.opacity = "0";
+    }
+  }
+  
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>

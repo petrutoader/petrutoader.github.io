@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>Using an Arduino to read Game Boy cartridges - After Party</title>
+  <meta content='Using an Arduino to read Game Boy cartridges - After Party' property='title' />
+  <meta content='Using an Arduino to read Game Boy cartridges - After Party' property='og:title' />
+
+
+<meta property="og:description" content="Intro This is a blog post part of my project to build a flashcart for the Game Boy, you can read the previous post here.
+Overview There are two main components needed in order to build this software:
+ The Arduino&rsquo;s software, to manipulate to ports so that we can read/write to ROM/SRAM The software on the computer to read the data gathered by the Arduino  The reason behind why we need to use software on the computer is because the Arduino doesn&rsquo;t have enough memory to hold all types of Game Boy cartridges, so either we attach some sort of SD card shield, either we send all data via Serial port to the computer." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://x85.me/posts/using-an-arduino-to-read-game-boy-cartridges/" />
+
+
+<meta property="article:published_time" content="2018-08-31T10:16:44&#43;02:00"/>
+
+<meta property="article:modified_time" content="2018-08-31T10:16:44&#43;02:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.1" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #8C6056; 
+  --secondary-color: #AFD5AA;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link href='/feed.xml' rel="alternate" type="application/atom+xml" title="After Party" />
+</head>
+<body class="global-font">
+  <nav class=" justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns content-width" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">After Party</a>
+  </div>
+  
+</nav>
+
+  
+<main class="center mv4 content-width ph3">
+  <div class="f3 fw6 heading-color heading-font post-title">Using an Arduino to read Game Boy cartridges</div>
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>31 Aug 2018</time> 
+     | 
+    
+    categories: [ <a href='/categories/gameboy' class="link silver">gameboy</a> <a href='/categories/arduino' class="link silver">arduino</a>  ]
+    
+    
+  </p>
+  <div class="lh-copy post-content">
+
+<h1 id="intro">Intro</h1>
+
+<p>This is a blog post part of my project to build a flashcart for the Game Boy, you can read the <a href="/post/how-do-gameboy-cartridges-work">previous post here</a>.</p>
+
+<h1 id="overview">Overview</h1>
+
+<p>There are two main components needed in order to build this software:</p>
+
+<ul>
+<li>The Arduino&rsquo;s software, to manipulate to ports so that we can read/write to ROM/SRAM</li>
+<li>The software on the computer to read the data gathered by the Arduino</li>
+</ul>
+
+<p>The reason behind why we need to use software on the computer is because the Arduino doesn&rsquo;t have enough memory to hold all types of Game Boy cartridges, so either we attach some sort of SD card shield, either we send all data via Serial port to the computer.</p>
+
+<p>I&rsquo;m thinking of building a GUI for the software on the computer that will be able to tell the Arduino what operations to run.</p>
+
+<h1 id="arduino-s-software">Arduino&rsquo;s software</h1>
+
+<p>I have published the code for the reader <a href="https://github.com/petrutoader/gb-reader">on GitHub</a>, please take a look and if you find anything that could be improved, please do so by contributing to it!</p>
+
+<p>We&rsquo;ll take a brief look at the code, from the start I can tell you that the files we should be looking at right now are:</p>
+
+<ul>
+<li>src/main.cpp — main implementation</li>
+<li>include/GBIO.h — header file for the GBIO library</li>
+<li>lib/GBIO.cpp — GBIO library</li>
+</ul>
+
+<p>I have written the GBIO library that will help you implement the reading/writing for whatever cartridge you want. At the moment, the only assumptions it takes is the connections to digital and analog pins on the Arduino, but I&rsquo;m looking forward to changing that so that you can specify which ports to use yourself.</p>
+
+<p>I won&rsquo;t be going through each line of the code, I leave that to the reader if you want, as the code is rather simple. The core idea behind it is the following:</p>
+
+<h2 id="pin-usage">Pin usage</h2>
+
+<p>I&rsquo;ll briefly describe the basic operations we&rsquo;ll be doing, you can read more about the pins <a href="/post/how-do-gameboy-cartridges-work">in the previous post</a>.</p>
+
+<ul>
+<li>Send the address you want to access via A0-16 pins</li>
+<li>Read/write via the D0-7 pins</li>
+<li>Control operation types via WR, RD, CS_SRAM pins</li>
+</ul>
+
+<h2 id="read-the-rom">Read the ROM</h2>
+
+<p>Reading the ROM was the first thing I implemented, it&rsquo;s widely used as it provides not only the game but also important data such as ROM and SRAM bank counts, which you need nevertheless in order to read and write to the SRAM.</p>
+
+<ul>
+<li>Read the ROM bank count (to see how many times to switch banks via the MBC)</li>
+<li>Iterate through addresses 0x0000 to 0x4000, once you reach the edge address switch the bank to the next one</li>
+<li>Output each byte to the Serial using the Arduino</li>
+</ul>
+
+<h2 id="read-the-sram">Read the SRAM</h2>
+
+<ul>
+<li>Read the SRAM bank count (to see how many times to switch banks via the MBC)</li>
+<li>Enable SRAM reading (separate instruction)</li>
+<li>Iterate through 0xA000 to 0xC000, once you reach the edge address switch the bank to the next one</li>
+<li>Output each byte to the Serial using the Arduino</li>
+</ul>
+
+<p><em>Note: Some different carts might have different SRAM edge addresses.</em></p>
+
+<h2 id="write-the-sram">Write the SRAM</h2>
+
+<p>Here&rsquo;s the fun part, ever wished to have a shiny Celebi on a Pokemon cart? Now you&rsquo;ll be able to.</p>
+
+<ul>
+<li>Read the SRAM bank count (to see how many times to switch banks via the MBC)</li>
+<li>Enable SRAM reading (separate instruction)</li>
+<li>Input each byte from the Serial using the Arduino</li>
+<li>Put CS_SRAM LOW and then HIGH for each byte written</li>
+<li>Iterate through 0xA000 to 0xC000, once you reach the edge address switch the bank to the next one</li>
+</ul>
+
+<h1 id="computer-software">Computer software</h1>
+
+<p>The idea behind the software running on the computer is the following:</p>
+
+<ul>
+<li>dump.py — outputs data into a file via Serial from the Arduino, passing command line arguments for the output file</li>
+<li>write_sram.py — inputs data from a file, and sends it via Serial to the Arduino</li>
+</ul>
+
+<p>You will most likely have to write your serial&rsquo;s port device in the files as well as to read the code to understand which command line arguments you need to pass.</p>
+
+<h1 id="what-s-next">What&rsquo;s next</h1>
+
+<p>Well, now we&rsquo;re able to read the ROM and read/write to the SRAM and that&rsquo;s about all you can do with original cartridges, but I think it&rsquo;s time to step our game up and try to create a flashcart ourselves which will allow us to play backed up games.</p>
+
+<p>We&rsquo;ll use one of InsideGadget&rsquo;s flashcart that uses a AM29F016B flash chip first and after we&rsquo;ve got a sucessful cart write to it we can go further and try to make our own flashcart from scratch.</p>
+
+<p>Stay tuned!</p>
+</div>
+</main>
+ 
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2">
+  <a href="https://x85.me/posts/how-do-gameboy-cartridges-work/">prev post</a>
+  <a href="https://x85.me/posts/nand2tetris-building-a-computer-from-nand-gates/">next post</a>
+  </p>
+</div>
+
+  <footer class="content-width mt0 mt5-l mb4 f6 center ph3 gray tc tl-l">
+  <hr class="dn db-l ml0-l gray w3"><br>
+  Powered by <a href="https://gohugo.io/" target="_blank" class="link gray dim">Hugo</a>, based on the <a href="https://github.com/lingxz/er" target="_blank" class="link gray dim">Er</a> theme. <br>
+  
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+  
+  if (document.getElementById("tag-cloud") !== null) { 
+    if (prevScrollpos > currentScrollPos) { 
+      document.getElementById("tag-cloud").style.visibility = "visible";
+      document.getElementById("tag-cloud").style.opacity = "1";
+    } else {
+      document.getElementById("tag-cloud").style.visibility = "hidden";
+      document.getElementById("tag-cloud").style.opacity = "0";
+    }
+  }
+  
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>

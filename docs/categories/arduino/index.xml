@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>arduino on After Party</title>
+    <link>https://x85.me/categories/arduino/</link>
+    <description>Recent content in arduino on After Party</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 31 Aug 2018 10:16:44 +0200</lastBuildDate>
+    
+	<atom:link href="https://x85.me/categories/arduino/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using an Arduino to read Game Boy cartridges</title>
+      <link>https://x85.me/posts/using-an-arduino-to-read-game-boy-cartridges/</link>
+      <pubDate>Fri, 31 Aug 2018 10:16:44 +0200</pubDate>
+      
+      <guid>https://x85.me/posts/using-an-arduino-to-read-game-boy-cartridges/</guid>
+      <description>Intro This is a blog post part of my project to build a flashcart for the Game Boy, you can read the previous post here.
+Overview There are two main components needed in order to build this software:
+ The Arduino&amp;rsquo;s software, to manipulate to ports so that we can read/write to ROM/SRAM The software on the computer to read the data gathered by the Arduino  The reason behind why we need to use software on the computer is because the Arduino doesn&amp;rsquo;t have enough memory to hold all types of Game Boy cartridges, so either we attach some sort of SD card shield, either we send all data via Serial port to the computer.</description>
+    </item>
+    
+    <item>
+      <title>How do Game Boy cartridges work?</title>
+      <link>https://x85.me/posts/how-do-gameboy-cartridges-work/</link>
+      <pubDate>Thu, 16 Aug 2018 11:23:44 +0200</pubDate>
+      
+      <guid>https://x85.me/posts/how-do-gameboy-cartridges-work/</guid>
+      <description>Brief intro and motivation I grew up playing Game Boy games, I always wished to get into console hacking after seeing what Dark_AleX did on the Playstation Portable, but never actually tried to do so.
+I recently got into Electrical Engineering by messing around with Arduinos and I thought that the standard tutorials/challenges you have on the Arduino are really cool but don&amp;rsquo;t actually produce anything useful in the end.</description>
+    </item>
+    
+  </channel>
+</rss>

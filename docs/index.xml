@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>After Party</title>
+    <link>https://x85.me/</link>
+    <description>Recent content on After Party</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Aug 2019 12:00:00 +0200</lastBuildDate>
+    
+	<atom:link href="https://x85.me/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>It&#39;s been a while</title>
+      <link>https://x85.me/posts/its-been-a-while/</link>
+      <pubDate>Thu, 01 Aug 2019 12:00:00 +0200</pubDate>
+      
+      <guid>https://x85.me/posts/its-been-a-while/</guid>
+      <description>What happened It&amp;rsquo;s been a while since my last post, a full year has passed since I decided to make the birthday present for my friend, a Game Boy game. I just spent a lot of time studying and travelling. I went to Japan and I think I&amp;rsquo;ve developed a passion for electronics, I&amp;rsquo;ve been studying quite a lot of physics, chemistry and electronics as well in parallel with my Open University studies (which mostly covers basic engineering concepts at the moment).</description>
+    </item>
+    
+    <item>
+      <title>nand2tetris, building a modern computer from NAND gates</title>
+      <link>https://x85.me/posts/nand2tetris-building-a-computer-from-nand-gates/</link>
+      <pubDate>Mon, 15 Oct 2018 10:16:44 +0200</pubDate>
+      
+      <guid>https://x85.me/posts/nand2tetris-building-a-computer-from-nand-gates/</guid>
+      <description>Motivation I never studied software engineering in an academic setup, but somehow I got to the point in which I was confident with my software development skills. Obviously I wasn&amp;rsquo;t doing anything too fancy but it was enough for me. Recently as you can see from my blog I started getting into electrical engineering. I discovered that I had a huge knowledge gap, as I didn&amp;rsquo;t understand how the electrical part of the computers I was coding for was working, nor did I know how they functioned on a really low level.</description>
+    </item>
+    
+    <item>
+      <title>Using an Arduino to read Game Boy cartridges</title>
+      <link>https://x85.me/posts/using-an-arduino-to-read-game-boy-cartridges/</link>
+      <pubDate>Fri, 31 Aug 2018 10:16:44 +0200</pubDate>
+      
+      <guid>https://x85.me/posts/using-an-arduino-to-read-game-boy-cartridges/</guid>
+      <description>Intro This is a blog post part of my project to build a flashcart for the Game Boy, you can read the previous post here.
+Overview There are two main components needed in order to build this software:
+ The Arduino&amp;rsquo;s software, to manipulate to ports so that we can read/write to ROM/SRAM The software on the computer to read the data gathered by the Arduino  The reason behind why we need to use software on the computer is because the Arduino doesn&amp;rsquo;t have enough memory to hold all types of Game Boy cartridges, so either we attach some sort of SD card shield, either we send all data via Serial port to the computer.</description>
+    </item>
+    
+    <item>
+      <title>How do Game Boy cartridges work?</title>
+      <link>https://x85.me/posts/how-do-gameboy-cartridges-work/</link>
+      <pubDate>Thu, 16 Aug 2018 11:23:44 +0200</pubDate>
+      
+      <guid>https://x85.me/posts/how-do-gameboy-cartridges-work/</guid>
+      <description>Brief intro and motivation I grew up playing Game Boy games, I always wished to get into console hacking after seeing what Dark_AleX did on the Playstation Portable, but never actually tried to do so.
+I recently got into Electrical Engineering by messing around with Arduinos and I thought that the standard tutorials/challenges you have on the Arduino are really cool but don&amp;rsquo;t actually produce anything useful in the end.</description>
+    </item>
+    
+  </channel>
+</rss>

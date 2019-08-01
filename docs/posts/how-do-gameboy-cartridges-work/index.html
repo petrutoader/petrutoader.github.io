@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content='text/html; charset=utf-8' http-equiv='content-type' />
+
+  <title>How do Game Boy cartridges work? - After Party</title>
+  <meta content='How do Game Boy cartridges work? - After Party' property='title' />
+  <meta content='How do Game Boy cartridges work? - After Party' property='og:title' />
+
+
+<meta property="og:description" content="Brief intro and motivation I grew up playing Game Boy games, I always wished to get into console hacking after seeing what Dark_AleX did on the Playstation Portable, but never actually tried to do so.
+I recently got into Electrical Engineering by messing around with Arduinos and I thought that the standard tutorials/challenges you have on the Arduino are really cool but don&rsquo;t actually produce anything useful in the end." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://x85.me/posts/how-do-gameboy-cartridges-work/" />
+
+
+<meta property="article:published_time" content="2018-08-16T11:23:44&#43;02:00"/>
+
+<meta property="article:modified_time" content="2018-08-16T11:23:44&#43;02:00"/>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.1" />
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<style type="text/css">/*https://coolors.co/afd5aa-f0f2ef-a69f98-3d3d3d-8c6057*/
+:root {
+  --main-color: #8C6056; 
+  --secondary-color: #AFD5AA;
+  --logo-text-color: #fff;
+  --body-text-color: #3d3d3d;
+  --heading-text-color: #383838;
+  --background-color: #fff;
+}</style>
+<link href='/css/tachyons.min.css' rel="stylesheet">
+<link href='/css/styles.css' rel="stylesheet">
+
+
+<link rel="icon" 
+ 
+  href='/favicon.ico'
+
+type="image/x-icon"/>
+
+<link href='/feed.xml' rel="alternate" type="application/atom+xml" title="After Party" />
+</head>
+<body class="global-font">
+  <nav class=" justify-between border-box pa3 pl3-l pr2-l mt1 mt0-ns content-width" id="navbar">
+  <div class="flex">
+    <a class="f4 fw6 ttu no-underline dim bg-main-color pv1 ph2 br2" id="site-title" href='/' title="Home">After Party</a>
+  </div>
+  
+</nav>
+
+  
+<main class="center mv4 content-width ph3">
+  <div class="f3 fw6 heading-color heading-font post-title">How do Game Boy cartridges work?</div>
+  <p class="silver f6 mt1 mb4 post-meta">
+    <time>16 Aug 2018</time> 
+     | 
+    
+    categories: [ <a href='/categories/gameboy' class="link silver">gameboy</a> <a href='/categories/arduino' class="link silver">arduino</a>  ]
+    
+    
+  </p>
+  <div class="lh-copy post-content">
+
+<h1 id="brief-intro-and-motivation">Brief intro and motivation</h1>
+
+<p>I grew up playing Game Boy games, I always wished to get into console hacking after seeing what <a href="https://en.wikipedia.org/wiki/PlayStation_Portable_homebrew#Dark_AleX">Dark_AleX did on the Playstation Portable</a>, but never actually tried to do so.</p>
+
+<p>I recently got into Electrical Engineering by messing around with Arduinos and I thought that the standard tutorials/challenges you have on the Arduino are really cool but don&rsquo;t actually produce anything useful in the end. I collect in my spare time retro consoles and video games (fixing and refurbishing them).</p>
+
+<p>I thought I could use what I know in order to build a Game Boy game, and use the Arduino in order to flash it to a cartridge. I will write a series of posts on this blog explaining how I&rsquo;m achieving this, but first things first, let&rsquo;s understand a little bit how Game Boy cartridges work.</p>
+
+<h1 id="cartridge-components">Cartridge components</h1>
+
+<p>Let&rsquo;s first look at this picture of a Game Boy cartridge PCB</p>
+
+<p><img src="/media/how-do-gameboy-cartridges-work/pcb_front.jpg" alt="Game Boy PCB" /></p>
+
+<p>You can see in the picture above the following components:</p>
+
+<ul>
+<li>MBC3 — Memory Bank Controller</li>
+<li>DMG-AW2P-0 — ROM</li>
+<li>BR62256F-70LL — SRAM</li>
+<li>MM1134 — SRAM controller</li>
+<li>Battery</li>
+</ul>
+
+<h2 id="memory-bank-controller">Memory Bank Controller</h2>
+
+<p>As the Game Boy 16bit address bus offers limited space for ROM and RAM handling many cartridges used Memory Bank Controllers in order to expand the available address space by bank switching. Typical to how Nintendo handled hardware for the NES and SNES, the MBC are located in the game cartridge, not in the console. There are multiple MBC types:</p>
+
+<ul>
+<li>MBC1 (max 2MByte ROM and/or 32KByte RAM)</li>
+<li>MBC2 (max 256KByte ROM and 512x4bits RAM)</li>
+<li>MBC3 (max 2MByte ROM and 64KByte RAM and Timer)</li>
+<li>MBC5 (max 8MByte ROM and 128KByte RAM)</li>
+</ul>
+
+<p>Note: Not all games have a Memory Bank Controller, games under 32KBytes could be fitted inside a simple ROM memory without the need of a MBC.</p>
+
+<h2 id="rom">ROM</h2>
+
+<p>This is where the game is stored, please take note that it is a Read Only Memory, so this is going to give us some small headaches when we&rsquo;ll want to flash another game to the cartridge as part of this series of blog posts.</p>
+
+<h2 id="sram">SRAM</h2>
+
+<p>This is where the saves of the game are stored, again not all games used saves. An example is Bugs Bunny: Crazy Castle 3, which uses a password system in order to return to the level you were playing. Obviously this chip offers R/W support, so we can start our Arduino project by reading and writing to this chip.</p>
+
+<h2 id="battery">Battery</h2>
+
+<p>This is used solely to keep the SRAM alive. As I said I usually collect and refurbish retro video games, so if your cartridge doesn&rsquo;t save the game, then most likely your battery is dead and needs replacement.</p>
+
+<h1 id="cartridge-pinouts">Cartridge pinouts</h1>
+
+<p>In order to read from the cartridge we&rsquo;ll have to understand what each pin does.</p>
+
+<p><img src="/media/how-do-gameboy-cartridges-work/gb_cartridge_pins.jpg" alt="Game Boy cartridge pinout" /></p>
+
+<ul>
+<li>VCC — Power (5V)</li>
+<li>CLK – Clock signal (not used)</li>
+<li>~WR – if low(grounded) and if RD is low, we can write to the SRAM and load a ROM or SRAM bank</li>
+<li>~RD – if low (grounded) and if WR is high, we can read the ROM and SRAM</li>
+<li>CS_SRAM – if enabled, selects the SRAM</li>
+<li>A0 – A15 – the 16 addresses lines that we tell the ROM which particular byte of data we want to read</li>
+<li>D0 – D7 – the 8 data lines that we read the byte of data selected by the 16 address lines. These data lines can also be used to control which ROM bank to load (important for later).</li>
+<li>Reset – needs to be connected to VCC</li>
+<li>Audio in – (not used)</li>
+<li>GND – Ground</li>
+</ul>
+
+<h1 id="reading-the-game-boy-cartridge">Reading the Game Boy Cartridge</h1>
+
+<p>In order to read the cartridge we&rsquo;ll need a way for getting inputs and outputs into the pins of the cartridge, for that I chose the Arduino, since it&rsquo;s pretty well documented and easy to use. It&rsquo;s important to know that due to the large amount of GPIOs we&rsquo;ll need something a little more beefy than the Arduino Uno, so I chose the Arduino Mega, featuring 52 digital pins.</p>
+
+<h2 id="replacement-components">Replacement components</h2>
+
+<p>First we&rsquo;ll need some sort of reading header, you can get replacement parts really easily from AliExpress, I have ordered <a href="https://www.aliexpress.com/item/For-Nintendo-DS-NDSL-GBA-Game-Cartridge-Card-Reader-Slot-Repair-Part/32679592016.html?spm=a2g0s.9042311.0.0.66584c4dy2PlKE">a bunch of these</a> in order to read the Game Boy cartridges.</p>
+
+<p>Sadly this doesn&rsquo;t come with a datasheet so I had to grab my trustworthy Mitutoyo digital caliper and take measurements for each tiny part of it. It&rsquo;s important to have a good measuring tool as resending your designs multiple times because you messed up the measurements can get costly really fast.</p>
+
+<h2 id="custom-pcbs">Custom PCBs</h2>
+
+<p>I have created a custom PCB that I ordered from <a href="https://www.jlcpcb.com">JLCPCB</a> for $2 and I&rsquo;ve created it using Autodesk&rsquo;s Eagle, which works fine on Windows as well as Mac OS. The most difficult part of it was getting the NDSL GBA Game Cartridge from AliExpress in the right measurements and creating a new library in Eagle.</p>
+
+<h3 id="autodesk-eagle">Autodesk Eagle</h3>
+
+<p>Here&rsquo;s the design of it in eagle:</p>
+
+<p><img src="/media/how-do-gameboy-cartridges-work/eagle-design.png" alt="Game Boy cartridge breakout shield" /></p>
+
+<p>Here you can see how the designs look once built!</p>
+
+<p><img src="/media/how-do-gameboy-cartridges-work/pcb-finished.jpg" alt="PCBs finished" /></p>
+
+<h3 id="soldering">Soldering</h3>
+
+<p>Everything worked perfectly from the beginning, you need some basic soldering skills in order to solder this yourself. The only one which is more challenging is getting the cart reader&rsquo;s pins soldered without a SMD soldering station, but you can do it with some extra flux and some courage.</p>
+
+<p>If you do have a SMD soldering station I think you don&rsquo;t really need my advice, but I recommend &gt;T4 paste, T3 won&rsquo;t make good solder points at the size of the pins.</p>
+
+<p><img src="/media/how-do-gameboy-cartridges-work/pcb-soldered.jpg" alt="PCBs soldered" /></p>
+
+<p><em>Note: Please ignore the terrible soldering job on the pins, I had no paste :(</em></p>
+
+<h2 id="software-layer">Software layer</h2>
+
+<p>The next part will be starting to use an Arduino in order to connect to the female header pins I just soldered and read/write to it. As I previously wrote I decided to use the Arduino Mega, because it uses the ATMEL ATMega2560 chip, having a ton of GPIO ports.</p>
+
+<p>When we&rsquo;ll get to make something more accessible for an end-consumer we&rsquo;ll be embedding the ATMega2560 chip and getting rid of the Arduino, but for the time being, let&rsquo;s use the Arduino&rsquo;s help.</p>
+
+<p><img src="/media/how-do-gameboy-cartridges-work/pcb-arduino.jpg" alt="PCBs soldered and attached to arduino" /></p>
+
+<p>Now that we&rsquo;ve got everything soldered and ready to go, let&rsquo;s go further and add the software layer so that we can start playing around with it!</p>
+
+<p>Next Part: <a href="/posts/using-an-arduino-to-read-game-boy-cartridges">Using an Arduino to read Game Boy cartridges</a></p>
+
+<h1 id="sources">Sources</h1>
+
+<ul>
+<li><a href="https://www.insidegadgets.com/2011/03/19/gbcartread-arduino-based-gameboy-cart-reader-–-part-1-read-the-rom/">InsideGadget&rsquo;s Arduino Reader</a></li>
+<li><a href="http://gbdev.gg8.se/wiki/articles/Memory_Bank_Controllers">GBDEV on MBCs</a></li>
+<li><a href="https://dhole.github.io/post/gameboy_cartridge_emu_1/">Dhole&rsquo;s emulating a Game Boy cartridge</a></li>
+</ul>
+</div>
+</main>
+ 
+
+
+
+
+
+
+<div class="tl fixed list-pages lh-copy" id="contents-list"></div>
+
+
+
+<div class="pagination tc tr-l db fixed-l bottom-2-l right-2-l mb3 mb0-l">
+  
+<a id="scroll-to-top" class="f6 o-0 link br2 ph2 pv1 mb1 bg-main-color pointer" onclick="topFunction()" style="color: #fff; visibility: hidden; display: none; transition: opacity .5s, visibility .5s;" title="back to top">back to top</a>
+<br>
+  <p class="mb0 mt2">
+  
+  <a href="https://x85.me/posts/using-an-arduino-to-read-game-boy-cartridges/">next post</a>
+  </p>
+</div>
+
+  <footer class="content-width mt0 mt5-l mb4 f6 center ph3 gray tc tl-l">
+  <hr class="dn db-l ml0-l gray w3"><br>
+  Powered by <a href="https://gohugo.io/" target="_blank" class="link gray dim">Hugo</a>, based on the <a href="https://github.com/lingxz/er" target="_blank" class="link gray dim">Er</a> theme. <br>
+  
+</footer>
+  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.css">
+<style>.is-active-link::before { background-color: var(--secondary-color); }</style>
+
+
+
+
+<script type="text/javascript">
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+
+  
+  if (document.getElementById("tag-cloud") !== null) { 
+    if (prevScrollpos > currentScrollPos) { 
+      document.getElementById("tag-cloud").style.visibility = "visible";
+      document.getElementById("tag-cloud").style.opacity = "1";
+    } else {
+      document.getElementById("tag-cloud").style.visibility = "hidden";
+      document.getElementById("tag-cloud").style.opacity = "0";
+    }
+  }
+  
+
+  
+  if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+      document.getElementById("scroll-to-top").style.display = "inline";
+      document.getElementById("scroll-to-top").style.visibility = "visible";
+      document.getElementById("scroll-to-top").style.opacity = "1";
+  } else {
+      document.getElementById("scroll-to-top").style.visibility = "hidden";
+      document.getElementById("scroll-to-top").style.opacity = "0";
+  }
+  
+  prevScrollpos = currentScrollPos;
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0; 
+}
+
+
+
+
+
+
+if (document.getElementById("contents-list") !== null && document.getElementsByClassName("post-content").length !== 0) { 
+  tocbot.init({
+    
+    tocSelector: '#contents-list',
+    
+    contentSelector: '.post-content',
+    
+    headingSelector: 'h1, h2, h3',
+  });
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>
